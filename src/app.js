@@ -2,7 +2,7 @@
 const express = require('express')
 const morgan = require('morgan')
 const mongoose = require('mongoose');
-// const User = require('./models/user');
+const User = require('./models/user');
 const app = express()
 app.use(morgan("dev"))
 
@@ -15,21 +15,21 @@ app.get('/', (req, res) => {
 })
 
 
-// app.get("/create-user", async (req, res)=>{
-//     const user = new User({
-//         name: "Lakum",
-//         email: "lakumss@me.com",
-//         password: "password"
-//     })
-//     await user.save();
-//     res.json(user)
-// })
+app.get("/create", async (req, res)=>{
+    const user = new User({
+        name: "Lakum",
+        email: "lakumss@me.com",
+        password: "password"
+    })
+    await user.save();
+    res.json(user)
+})
 
 
-// app.get("/delete-user", async (req, res)=>{
-//     const deletedUser = await User.deleteOne({email: "lakumss@me.com"})
-//     res.json(deletedUser)
-// })
+app.delete("/delete", async (req, res)=>{
+    const deletedUser = await User.deleteOne({email: "lakumss@me.com"})
+    res.json(deletedUser)
+})
 
 
 module.exports = app
